@@ -20,9 +20,13 @@ app.use('/api/items', itemRoutes);
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'))
-  );
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api')) {
+      res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
+    } else {
+      next();
+    }
+  });
 } else {
   app.get('/', (req, res) => {
     res.send('API is running...');
