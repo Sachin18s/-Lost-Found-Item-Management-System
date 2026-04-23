@@ -1,0 +1,12 @@
+{
+  "name": "lost-and-found-system",
+  "version": "1.0.0",
+  "description": "Lost and Found System",
+  "scripts": {
+    "install-server": "cd backend && npm install",
+    "install-client": "cd frontend && npm install",
+    "build-client": "cd frontend && npm run build",
+    "build": "npm run install-server && npm run install-client && npm run build-client",
+    "start": "cd backend && node server.js"
+  }
+}
